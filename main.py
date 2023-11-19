@@ -11,6 +11,18 @@ from sqlalchemy.orm import relationship
 from forms import RegisterForm, LoginForm, CaloriesForm
 import os
 import smtplib
+import requests
+
+NUTRITIONIX_ENDPOINT = "https://trackapi.nutritionix.com/v2/natural/exercise"
+NUTRITIONIX_APP_ID = os.environ.get("APP_ID")
+NUTRITIONIX_APP_KEY = os.environ.get("APP_KEY")
+
+nutritionix_headers = {
+    "x-app-id": NUTRITIONIX_APP_ID,
+    "x-app-key": NUTRITIONIX_APP_KEY,
+    "content-type": "application/json",
+}
+
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
@@ -106,7 +118,25 @@ def logout():
 @app.route("/calories", methods=["GET", "POST"])
 def calories():
     form = CaloriesForm()
-    return render_template("calories.html", form=form, current_user=current_user)
+    if form.validate_on_submit():
+        exercise = form.exercise.data
+        gender = form.gender.data
+        weight = form.weight.data
+        height = form.height.data
+        age = form.age.data
+        nutritionix_data = {
+            "query": exercise,
+            "gender": gender,
+            "weight_kg": weight,
+            "height_cm": height,
+            "age": age
+        }
+        response = requests.post(NUTRITIONIX_ENDPOINT, headers=nutritionix_headers, json=nutritionix_data).json()
+        # response.raise_for_status()
+        data = response["exercises"][0]
+        # print(data)
+        return render_template("calories.html", data=data, form=form, is_check=True)
+    return render_template("calories.html", form=form, current_user=current_user, is_check=False)
 
 
 if __name__ == "__main__":
