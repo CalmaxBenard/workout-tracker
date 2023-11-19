@@ -44,6 +44,12 @@ def home():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
+
+        # check if users exists in the database
+        user = db.session.execute(db.select(User).where(User.email == form.email.data)).scalar()
+        if user:
+            flash("That email is already registered, log in instead!")
+            return redirect(url_for("login"))
         hashed_and_salted_password = generate_password_hash(
             form.password.data,
             method="pbkdf2:sha256",
