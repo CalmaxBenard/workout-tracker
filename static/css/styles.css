@@ -66,11 +66,12 @@ body {
     position: relative;
     margin-bottom: 1rem;
     padding-top: calc(3rem + 57px);
-    padding-bottom: 8rem;
+    padding-bottom: 20rem;
     background: no-repeat center center;
     background-color: #6c757d;
     background-size: cover;
     background-attachment: scroll;
+    overflow: hidden;
 
 }
 .masthead:before {
@@ -83,6 +84,54 @@ body {
     background-color: #212529;
     opacity: 0.5;
 }
+
+header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+  color: #fff;
+}
+header.masthead .page-heading,
+header.masthead .site-heading {
+  text-align: center;
+}
+header.masthead .page-heading h1, header.masthead .page-heading .h1,
+header.masthead .site-heading h1,
+header.masthead .site-heading .h1 {
+  font-size: 3rem;
+}
+header.masthead .page-heading .subheading,
+header.masthead .site-heading .subheading {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+  display: block;
+  margin-top: 0.625rem;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading h1, header.masthead .post-heading .h1 {
+  font-size: 2.25rem;
+}
+header.masthead .post-heading .meta,
+header.masthead .post-heading .subheading {
+  line-height: 1.1;
+  display: block;
+}
+header.masthead .post-heading .subheading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.75rem 0 2rem;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading .meta {
+  font-size: 0.5rem;
+  font-weight: 300;
+  font-style: italic;
+  font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+header.masthead .post-heading .meta a {
+  color: #fff;
+}
+
 .px-3 .cover{
      text-align:center;
      background-color: #555555;
@@ -98,6 +147,7 @@ body {
 .mb-4 {
     margin-bottom: 1.5rem !important
     padding-bottom: 8rem
+
 }
 
 .row {
