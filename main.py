@@ -44,7 +44,21 @@ def home():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        pass
+        hashed_and_salted_password = generate_password_hash(
+            form.password.data,
+            method="pbkdf2:sha256",
+            salt_length=8
+        )
+        new_user = User(
+            first_name=form.fname.data,
+            last_name=form.lname.data,
+            email=form.email.data,
+            password=hashed_and_salted_password,
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("register.html", form=form)
 
 
 if __name__ == "__main__":
