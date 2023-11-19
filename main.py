@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-from forms import RegisterForm
+from forms import RegisterForm, LoginForm
 import os
 import smtplib
 
@@ -17,12 +17,22 @@ app.secret_key = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor
 Bootstrap5(app)
 
+# Configure flask-login
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
+
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy()
 db.init_app(app)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100))
@@ -65,6 +75,25 @@ def register():
         db.session.commit()
         return redirect(url_for("home"))
     return render_template("register.html", form=form)
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        # Check user email and password
+        password = form.password.data
+        user = db.session.execute(db.select(User).where(User.email == form.email.data)).scalar()
+        if not user:
+            flash("That email does not exist, please try again.")
+            return redirect(url_for("login"))
+        elif not check_password_hash(user.password, password):
+            flash("You entered wrong password, please try again.")
+            return redirect(url_for("login"))
+        else:
+            login_user(user)
+            return redirect(url_for("home"))
+    return render_template("login.html", form=form)
 
 
 if __name__ == "__main__":
