@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, CaloriesForm
 import os
 import smtplib
 
@@ -73,8 +73,9 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for("home"))
-    return render_template("register.html", form=form)
+        login_user(new_user)
+        return redirect(url_for("calories"))
+    return render_template("register.html", form=form, current_user=current_user)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -92,8 +93,20 @@ def login():
             return redirect(url_for("login"))
         else:
             login_user(user)
-            return redirect(url_for("home"))
-    return render_template("login.html", form=form)
+            return redirect(url_for("calories"))
+    return render_template("login.html", form=form, current_user=current_user)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
+
+
+@app.route("/calories", methods=["GET", "POST"])
+def calories():
+    form = CaloriesForm()
+    return render_template("calories.html", form=form, current_user=current_user)
 
 
 if __name__ == "__main__":
