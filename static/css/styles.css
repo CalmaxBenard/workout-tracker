@@ -66,12 +66,12 @@ body {
     position: relative;
     margin-bottom: 1rem;
     padding-top: calc(5rem + 57px);
-    padding-bottom: 20rem;
+    padding-bottom: 1rem;
     background: no-repeat center center;
     background-color: #6c757d;
     background-size: cover;
     background-attachment: scroll;
-    overflow: hidden;
+
 
 }
 .masthead:before {
@@ -105,7 +105,7 @@ header.masthead .site-heading .subheading {
   font-weight: 300;
   line-height: 1.1;
   display: block;
-  margin-top: 10rem;
+  margin-top: 4rem;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 header.masthead .post-heading h1, header.masthead .post-heading .h1 {
