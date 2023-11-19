@@ -156,12 +156,6 @@ header.masthead .post-heading .meta a {
 
 }
 
-.col {
-    flex: 1 0 0%;
-}
-.text-white-50 {
-    margin-top: 1rem;
-}
 .page-heading{
     text-align: left;
     margin-bottom: 8rem;
