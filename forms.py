@@ -23,3 +23,4 @@ class CaloriesForm(FlaskForm):
     weight = FloatField("Weight in Kgs", validators=[DataRequired()])
     height = FloatField("Height in cm", validators=[DataRequired()])
     age = IntegerField("Age", validators=[DataRequired()])
+    submit = SubmitField("Check Burned Calories")
