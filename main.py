@@ -135,9 +135,9 @@ def calories():
         # response.raise_for_status()
         data = response["exercises"][0]
         # print(data)
-        return render_template("calories.html", data=data, form=form, is_check=True)
+        return render_template("calories.html", data=data, form=form, is_check=True, current_user=current_user)
     return render_template("calories.html", form=form, current_user=current_user, is_check=False)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
