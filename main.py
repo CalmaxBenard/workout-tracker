@@ -39,7 +39,7 @@ def load_user(user_id):
     return db.get_or_404(User, user_id)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI", "sqlite:///users.db")
 db = SQLAlchemy()
 db.init_app(app)
 
