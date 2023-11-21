@@ -18,7 +18,7 @@ class LoginForm(FlaskForm):
 
 
 class CaloriesForm(FlaskForm):
-    exercise = StringField("What did you do?", validators=[DataRequired()])
+    exercise = StringField("What did you do?", validators=[DataRequired()], render_kw={"placeholder": "e.g. running for 2 hour"})
     gender = StringField("Gender", validators=[DataRequired()])
     weight = FloatField("Weight in Kgs", validators=[DataRequired()])
     height = FloatField("Height in cm", validators=[DataRequired()])
