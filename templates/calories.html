@@ -11,11 +11,12 @@
         <div class="page-heading">
             {% if is_check %}
             <h1>Well Done💪💪👊!</h1>
+            <div class="cover">
           <span class="subheading">Here are the results {{current_user.name}}</span>
 
-          <p>Exercise done: {{ data["user_input"] }}<br>
-          Approximate time spent in minutes: {{ data["duration_min"] }}<br>
-          Calories burned in kcal: {{ data["nf_calories"] }}<br></p>
+          <p>Exercise done: <span class="data">{{ data["user_input"] }}</span><br>
+          Approximate time spent in minutes: <span class="data">{{ data["duration_min"] }}</span><br>
+          Calories burned in kcal: <span class="data">{{ data["nf_calories"] }}</span><br></p></div>
             {% else %}
           <h1>Monitor Calories</h1>
             <span class="subheading">Enter your details in the form below 👇🏾!</span>
