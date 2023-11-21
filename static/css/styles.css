@@ -162,3 +162,18 @@ header.masthead .post-heading .meta a {
 .use p {
     text-align: left;
 }
+.cover .subheading {
+    color: navy;
+    font-weight: 900;
+}
+.cover {
+    background: #808080;
+}
+
+.cover p {
+    color: blue;
+}
+
+.data {
+    color: #f5f5f5;
+}
