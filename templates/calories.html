@@ -11,7 +11,7 @@
         <div class="page-heading">
             {% if is_check %}
             <h1>Well Done💪💪👊!</h1>
-          <span class="subheading">Here are the results</span>
+          <span class="subheading">Here are the results {{current_user.name}}</span>
 
           <p>Exercise done: {{ data["user_input"] }}<br>
           Approximate time spent in minutes: {{ data["duration_min"] }}<br>
